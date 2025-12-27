@@ -1,2 +1,181 @@
-body { margin: 0; overflow: hidden; }
-canvas { display: block; }
+/* Сброс стилей и базовая настройка */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    touch-action: none; /* Отключаем стандартные жесты браузера */
+}
+
+/* Canvas на весь экран */
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Контейнер для кнопок управления */
+#controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    user-select: none;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Стили кнопок */
+.control-btn {
+    width: 100px;
+    height: 60px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    touch-action: manipulation;
+}
+
+/* Активное состояние (при нажатии) */
+.control-btn:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Основная кнопка (Газ) */
+.control-btn.primary {
+    background: rgba(76, 175, 80, 0.7);
+    width: 120px;
+}
+
+.control-btn.primary:active {
+    background: rgba(76, 175, 80, 0.9);
+}
+
+/* Кнопка тормоза */
+.control-btn.danger {
+    background: rgba(244, 67, 54, 0.7);
+    width: 120px;
+}
+
+.control-btn.danger:active {
+    background: rgba(244, 67, 54, 0.9);
+}
+
+/* Информация о производительности (отладка) */
+#debugInfo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    pointer-events: none;
+}
+
+#debugInfo div {
+    margin: 2px 0;
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 400px) {
+    .control-btn {
+        width: 80px;
+        height: 50px;
+        font-size: 12px;
+    }
+    
+    .control-btn.primary,
+    .control-btn.danger {
+        width: 100px;
+    }
+}
+
+/* Адаптация для планшетов */
+@media (min-width: 768px) {
+    .control-btn {
+        width: 120px;
+        height: 70px;
+        font-size: 16px;
+    }
+    
+    .control-btn.primary,
+    .control-btn.danger {
+        width: 140px;
+    }
+}
+
+/* Скрываем отладочную информацию на продакшене (можно включить через JS) */
+body.production #debugInfo {
+    display: none;
+}
+
+/* Подсказка по управлению камерой */
+#cameraHint {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 1.6;
+    pointer-events: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    text-align: right;
+}
+
+#cameraHint:hover {
+    opacity: 1;
+}
+
+/* Показываем разные подсказки для ПК и мобильных */
+.mobile-hint {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-hint {
+        display: none;
+    }
+    .mobile-hint {
+        display: inline;
+    }
+}

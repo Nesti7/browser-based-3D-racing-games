@@ -1,14 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Racing Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>3D Гонки на Грузовиках</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Telegram WebApp SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://unpkg.com/cannon/build/cannon.min.js"></script>
-    <script src="main.js"></script>
+    <!-- Canvas для Three.js -->
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- UI: Кнопки управления -->
+    <div id="controls">
+        <div class="control-row">
+            <button id="btnLeft" class="control-btn">◀ Влево</button>
+            <button id="btnGas" class="control-btn primary">⬆ Газ</button>
+            <button id="btnRight" class="control-btn">▶ Вправо</button>
+        </div>
+        <div class="control-row">
+            <button id="btnBrake" class="control-btn danger">⬇ Тормоз</button>
+        </div>
+    </div>
+    
+    <!-- Информация о производительности (для отладки) -->
+    <div id="debugInfo">
+        <div id="fps">FPS: 0</div>
+        <div id="perfClass">Performance: -</div>
+    </div>
+    
+    <!-- Подсказка по управлению камерой -->
+    <div id="cameraHint">
+        <span class="desktop-hint">🖱️ ПКМ - вращать камеру | Колесо - приблизить<br>⌨️ WASD / Стрелки - управление</span>
+        <span class="mobile-hint">👆 Два пальца - вращать камеру</span>
+    </div>
+    
+    <!-- Three.js из CDN (последняя версия) -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <!-- Главный скрипт -->
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
