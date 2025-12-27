@@ -20,9 +20,11 @@ README.md -filter
 .gitignore -filter
 .gitattributes -filter
 LICENSE -filter
-Уже*.txt -filter
 
-# НЕ шифровать файлы с точкой (служебные)
-.cursorrules -filter
+# ШИФРОВАТЬ файлы проекта (включая служебные)
+Уже*.txt filter=git-crypt diff=git-crypt
+.cursorrules filter=git-crypt diff=git-crypt
+
+# НЕ шифровать другие служебные файлы
 .editorconfig -filter
 
