@@ -1,0 +1,28 @@
+# Git-Crypt шифрование для защиты кода
+
+# Шифровать весь JavaScript код
+*.js filter=git-crypt diff=git-crypt
+js/**/*.js filter=git-crypt diff=git-crypt
+
+# Шифровать CSS
+*.css filter=git-crypt diff=git-crypt
+
+# Шифровать HTML (может содержать API ключи)
+*.html filter=git-crypt diff=git-crypt
+
+# Шифровать конфиги и секреты
+*.json filter=git-crypt diff=git-crypt
+*.env filter=git-crypt diff=git-crypt
+*.config filter=git-crypt diff=git-crypt
+
+# НЕ шифровать публичные файлы
+README.md -filter
+.gitignore -filter
+.gitattributes -filter
+LICENSE -filter
+Уже*.txt -filter
+
+# НЕ шифровать файлы с точкой (служебные)
+.cursorrules -filter
+.editorconfig -filter
+

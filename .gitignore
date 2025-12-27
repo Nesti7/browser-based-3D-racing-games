@@ -1,0 +1,31 @@
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Логи
+*.log
+npm-debug.log*
+
+# Временные файлы
+*.tmp
+*.temp
+
+# Node modules (если будут использоваться)
+node_modules/
+
+# Сборка (если будет использоваться)
+dist/
+build/
+
+# Конфиденциальные данные
+.env
+.env.local
+config.local.js
+
